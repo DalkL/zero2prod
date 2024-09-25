@@ -88,8 +88,8 @@ pub fn get_configuration() -> Result<Settings, config::ConfigError> {
 
 impl DatabaseSettings {
     pub fn with_db(&self) -> PgConnectOptions {
-        let mut options = self.without_db().database(&self.database_name);
-        options.log_statements(tracing_log::log::LevelFilter::Trace);
+        let options = self.without_db().database(&self.database_name);
+        options.clone().log_statements(tracing_log::log::LevelFilter::Trace);
         return options;
     }
 
